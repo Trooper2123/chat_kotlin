@@ -29,9 +29,6 @@ class WebSocketChatConfig : WebSocketMessageBrokerConfigurer {
     override fun configureMessageBroker(registry: MessageBrokerRegistry) {
         registry.setApplicationDestinationPrefixes("/app")
         registry.enableStompBrokerRelay("/topic")
-//                .setRelayHost("clam.rmq.cloudamqp.com")
-//                .setClientLogin("pzfmgmdb")
-//                .setClientPasscode("48oHHAJQFmDgsSXXY9SG3evjwgkDCqPGD")
     }
 
     @Bean
@@ -43,24 +40,24 @@ class WebSocketChatConfig : WebSocketMessageBrokerConfigurer {
         return connectionFactory
     }
 
-    @Bean
-    fun connectionFactory(): CachingConnectionFactory {
-        return CachingConnectionFactory("pzfmgmdb")
-    }
-
-    @Bean
-    fun amqpAdmin(): AmqpAdmin? {
-        return connectionFactory()?.let { RabbitAdmin(it) }
-    }
-
-    @Bean
-    fun rabbitTemplate(): RabbitTemplate? {
-        return connectionFactory()?.let { RabbitTemplate(it) }
-    }
-
-    @Bean
-    fun myQueue(): Queue? {
-        return Queue("myqueue")
-    }
+//    @Bean
+//    fun connectionFactory(): CachingConnectionFactory {
+//        return CachingConnectionFactory("pzfmgmdb")
+//    }
+//
+//    @Bean
+//    fun amqpAdmin(): AmqpAdmin? {
+//        return connectionFactory()?.let { RabbitAdmin(it) }
+//    }
+//
+//    @Bean
+//    fun rabbitTemplate(): RabbitTemplate? {
+//        return connectionFactory()?.let { RabbitTemplate(it) }
+//    }
+//
+//    @Bean
+//    fun myQueue(): Queue? {
+//        return Queue("myqueue")
+//    }
 
 }
