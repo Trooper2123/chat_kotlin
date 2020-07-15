@@ -30,7 +30,6 @@ class WebSocketChatConfig : WebSocketMessageBrokerConfigurer {
         registry.setApplicationDestinationPrefixes("/app")
         registry.enableStompBrokerRelay("/topic")
 //                .setRelayHost("clam.rmq.cloudamqp.com")
-//                .setRelayPort(5672)
 //                .setClientLogin("pzfmgmdb")
 //                .setClientPasscode("48oHHAJQFmDgsSXXY9SG3evjwgkDCqPGD")
     }
