@@ -9,14 +9,14 @@ import org.springframework.stereotype.Controller
 
 @Controller
 class WebSocketChatController {
-    @MessageMapping("/chat.sedMessage")
-    @SendTo("/topic/kotlin")
+    @MessageMapping("/chat.sendMessage")
+    @SendTo("/topic/websocket")
     fun sendMessage (@Payload webSocketChatMessage: WebSocketChatMessage): WebSocketChatMessage {
     return webSocketChatMessage
     }
 
     @MessageMapping("chat.newUser")
-    @SendTo("/topic/kotlin")
+    @SendTo("/topic/websocket")
     fun newUser(@Payload webSocketChatMessage: WebSocketChatMessage, headerAccessor: SimpMessageHeaderAccessor): WebSocketChatMessage{
         headerAccessor.sessionAttributes?.put("username",webSocketChatMessage.sender)
         return webSocketChatMessage

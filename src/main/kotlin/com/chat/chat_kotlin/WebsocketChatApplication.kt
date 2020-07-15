@@ -4,8 +4,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class ChatKotlinApplication
+class WebsocketChatApplication
 
     fun main(args: Array<String>) {
-        runApplication<ChatKotlinApplication>(*args)
+        runApplication<WebsocketChatApplication>(*args)
     }

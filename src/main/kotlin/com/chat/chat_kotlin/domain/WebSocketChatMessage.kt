@@ -1,9 +1,9 @@
 package com.chat.chat_kotlin.domain
 
 
-class WebSocketChatMessage() {
-    var content: String =""
-    var sender: String = ""
-    var type:String = ""
+class WebSocketChatMessage (){
+    var type: String? = null
+    var content: String? = null
+    var sender: String? = null
 
 }

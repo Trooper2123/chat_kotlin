@@ -8,14 +8,14 @@ function connect(event) {
 	if (name) {
 		document.querySelector('#welcome-page').classList.add('hidden');
 		document.querySelector('#dialogue-page').classList.remove('hidden');
-		var socket = new SockJS('/websocketApp');
+		var socket = new SockJS('/websocket');
 		stompClient = Stomp.over(socket);
 		stompClient.connect({}, connectionSuccess);
 	}
 	event.preventDefault();
 }
 function connectionSuccess() {
-	stompClient.subscribe('/topic/kotlin', onMessageReceived);
+	stompClient.subscribe('/topic/websocket', onMessageReceived);
 	stompClient.send("/app/chat.newUser", {}, JSON.stringify({
 		sender : name,
 		type : 'newUser'
@@ -40,10 +40,10 @@ function onMessageReceived(payload) {
 	var messageElement = document.createElement('li');
 	if (message.type === 'newUser') {
 		messageElement.classList.add('event-data');
-		message.content = message.sender + 'has joined the chat';
+		message.content = message.sender + ' has joined the chat';
 	} else if (message.type === 'Leave') {
 		messageElement.classList.add('event-data');
-		message.content = message.sender + 'has left the chat';
+		message.content = message.sender + ' has left the chat';
 	} else {
 		messageElement.classList.add('message-data');
 		var element = document.createElement('i');
