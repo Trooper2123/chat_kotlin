@@ -16,9 +16,9 @@ class WebSocketChatConfig : WebSocketMessageBrokerConfigurer {
     override fun configureMessageBroker(registry: MessageBrokerRegistry) {
         registry.setApplicationDestinationPrefixes("/app")
         registry.enableStompBrokerRelay("/topic")
-                .setRelayHost("localhost")
+                .setRelayHost("clam.rmq.cloudamqp.com")
                 .setRelayPort(61613)
-                .setClientLogin("guest")
-                .setClientPasscode("guest")
+                .setClientLogin("pzfmgmdb")
+                .setClientPasscode("48oHHAJQFmDgsSXXY9SG3evjwgkDCqPG")
     }
 }
