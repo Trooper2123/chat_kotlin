@@ -3,21 +3,23 @@ package com.chat.chat_kotlin.config
 
 
 
-import org.springframework.amqp.core.AmqpAdmin
-import org.springframework.amqp.core.Queue
+import com.rabbitmq.client.AMQP
+import com.rabbitmq.client.Channel
+import org.springframework.amqp.rabbit.annotation.EnableRabbit
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory
+import org.springframework.amqp.rabbit.connection.Connection
 import org.springframework.amqp.rabbit.core.RabbitAdmin
 import org.springframework.amqp.rabbit.core.RabbitTemplate
 import org.springframework.boot.autoconfigure.amqp.RabbitProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.messaging.simp.config.MessageBrokerRegistry
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer
 
 
 @Configuration
+@EnableRabbit
 @EnableWebSocketMessageBroker
 class WebSocketChatConfig : WebSocketMessageBrokerConfigurer {
 
@@ -26,38 +28,21 @@ class WebSocketChatConfig : WebSocketMessageBrokerConfigurer {
         registry.addEndpoint("/websocket").withSockJS()
     }
 
-    override fun configureMessageBroker(registry: MessageBrokerRegistry) {
-        registry.setApplicationDestinationPrefixes("/app")
-        registry.enableStompBrokerRelay("/topic")
-    }
 
     @Bean
     fun rabbitConnectionFactory(config: RabbitProperties?): CachingConnectionFactory? {
         val connectionFactory = CachingConnectionFactory()
         connectionFactory.rabbitConnectionFactory.setUri("amqp://pzfmgmdb:48oHHAJQFmDgsSXXY9SG3evjwgkDCqPG@clam.rmq.cloudamqp.com/pzfmgmdb")
+        val conn: Connection = connectionFactory.createConnection()
+        val channel: Channel = conn.createChannel(true)
         val admin = RabbitAdmin(connectionFactory)
         admin.declareQueue()
         return connectionFactory
     }
 
-//    @Bean
-//    fun connectionFactory(): CachingConnectionFactory {
-//        return CachingConnectionFactory("pzfmgmdb")
-//    }
-//
-//    @Bean
-//    fun amqpAdmin(): AmqpAdmin? {
-//        return connectionFactory()?.let { RabbitAdmin(it) }
-//    }
-//
-//    @Bean
-//    fun rabbitTemplate(): RabbitTemplate? {
-//        return connectionFactory()?.let { RabbitTemplate(it) }
-//    }
-//
-//    @Bean
-//    fun myQueue(): Queue? {
-//        return Queue("myqueue")
-//    }
+    @Bean
+    fun myQueue(): AMQP.Queue? {
+        return AMQP.Queue()
+    }
 
 }

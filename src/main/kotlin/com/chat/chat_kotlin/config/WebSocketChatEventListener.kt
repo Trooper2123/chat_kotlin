@@ -29,5 +29,6 @@ class WebSocketChatEventListener {
             chatMessage.sender = username
             messagingTemplate!!.convertAndSend("/topic/websocket", chatMessage)
         }
+        print("Xau!")
     }
 }
