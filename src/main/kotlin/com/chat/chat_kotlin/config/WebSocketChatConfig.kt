@@ -1,18 +1,16 @@
 package com.chat.chat_kotlin.config
 
 
-
-
 import com.rabbitmq.client.AMQP
 import com.rabbitmq.client.Channel
 import org.springframework.amqp.rabbit.annotation.EnableRabbit
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory
 import org.springframework.amqp.rabbit.connection.Connection
 import org.springframework.amqp.rabbit.core.RabbitAdmin
-import org.springframework.amqp.rabbit.core.RabbitTemplate
 import org.springframework.boot.autoconfigure.amqp.RabbitProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.messaging.simp.config.MessageBrokerRegistry
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer
@@ -28,6 +26,17 @@ class WebSocketChatConfig : WebSocketMessageBrokerConfigurer {
         registry.addEndpoint("/websocket").withSockJS()
     }
 
+    //    localhost enable
+    override fun configureMessageBroker(registry: MessageBrokerRegistry) {
+        registry.setApplicationDestinationPrefixes("/app")
+        registry.enableStompBrokerRelay("/topic")
+//                .setRelayHost("127.0.0.1")
+//                .setRelayHost("localhost")
+//                .setRelayPort(61613)
+//                .setClientLogin("guest")
+//                .setClientPasscode("guest")
+
+    }
 
     @Bean
     fun rabbitConnectionFactory(config: RabbitProperties?): CachingConnectionFactory? {

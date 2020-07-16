@@ -16,3 +16,11 @@ s
 Csrc/main/kotlin/com/chat/chat_kotlin/domain/WebSocketChatMessage.kt,7\e\7eed56f8956389235656f1f100e34b919e017452
 r
 Bsrc/main/kotlin/com/chat/chat_kotlin/config/WebSocketChatConfig.kt,7\8\786971bb99d44f17c02aa1a5d006043cb454aba1
+V
+&src/main/resources/static/js/script.js,d\e\deac6f774db508ca6b82a3600e65d7ac49509558
+R
+"target/classes/static/js/script.js,b\d\bd1ba734c5029826ceae2190e2774ec1827d1405
+U
+%target/classes/application.properties,b\b\bb173f9557479135e0f1bcd9c6c5f7b4ae5f77e8
+p
+@src/main/kotlin/com/chat/chat_kotlin/WebsocketChatApplication.kt,6\5\65a0abeaa0cf431e1d43fb30ee6763e5c706862d
